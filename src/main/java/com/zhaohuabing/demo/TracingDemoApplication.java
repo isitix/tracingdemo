@@ -2,9 +2,6 @@ package com.zhaohuabing.demo;
 
 import io.jaegertracing.Configuration;
 import io.jaegertracing.internal.JaegerTracer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -13,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class TracingDemoApplication {
-
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
 		return restTemplateBuilder.build();
