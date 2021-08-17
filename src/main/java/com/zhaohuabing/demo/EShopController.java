@@ -21,12 +21,18 @@ import static java.lang.System.getProperty;
 public class EShopController {
     @Autowired
     private Tracer tracer;
+    @Autowired private InventoryService inventoryService;
+    @Autowired private BillingService billingService;
+    @Autowired private DeliveryService deliveryService;
 
     private static final Logger LOG = LoggerFactory.getLogger(EShopController.class);
 
     @RequestMapping(value = "/checkout")
     public String checkout(@RequestHeader HttpHeaders headers) {
         Span span = tracer.buildSpan("checkout").start();
+        inventoryService.createOrder(span);
+        billingService.payment(span);
+        deliveryService.arrangeDelivery(span);
         String result = "You have successfully checked out your shopping cart.";
         //Assume the checkout process takes 1 second
         try {
@@ -34,7 +40,6 @@ public class EShopController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        LOG.info(tracer.toString());
         span.finish();
         return result;
     }
