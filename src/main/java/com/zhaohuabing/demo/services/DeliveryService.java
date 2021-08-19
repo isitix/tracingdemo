@@ -36,8 +36,9 @@ public class DeliveryService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        String user = span.getBaggageItem("user");
         span.finish();
-        return "delivery in progress\n" + transport;
+        return String.format("delivery in progress, baggage user %s\n%s", user, transport);
 
     }
 }

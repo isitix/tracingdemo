@@ -25,6 +25,7 @@ public class EShopController {
     @RequestMapping(value = "/checkout")
     public String checkout(@RequestHeader HttpHeaders receivedHeaders) {
         Span span = tracer.buildSpan("checkout").withTag(Tags.SPAN_KIND.getKey(), Tags.SPAN_KIND_CLIENT).start();
+        span.setBaggageItem("user", "mik");
         HttpHeaders sentHeaders = new HttpHeaders();
         tracer.inject(span.context(), Format.Builtin.HTTP_HEADERS, new HttpHeaderCarrier(sentHeaders));
         HttpEntity<String> entity = new HttpEntity<>("", sentHeaders);

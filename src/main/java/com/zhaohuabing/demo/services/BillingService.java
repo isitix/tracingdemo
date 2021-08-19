@@ -25,7 +25,8 @@ public class BillingService  {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        String user = span.getBaggageItem("user");
         span.finish();
-        return "pay as you go\n";
+        return String.format("pay as you go, baggage user = %s\n", user);
     }
 }

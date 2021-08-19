@@ -25,7 +25,8 @@ public class LogisticsService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        String user = span.getBaggageItem("user");
         span.finish();
-        return "shipping processed\n";
+        return String.format("shipping processed baggage user %s\n", user);
     }
 }

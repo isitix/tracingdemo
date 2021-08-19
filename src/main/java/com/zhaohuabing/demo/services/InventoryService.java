@@ -26,7 +26,8 @@ public class InventoryService  {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        String user = span.getBaggageItem("user");
         span.finish();
-        return "Order created\n";
+        return String.format("Order created baggage user %s\n", user);
     }
 }
